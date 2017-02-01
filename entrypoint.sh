@@ -32,5 +32,7 @@ else
     EMU="arm"
 fi
 
-echo "no" | /usr/local/android-sdk/tools/android create avd -f -n test -t ${EMULATOR} --abi default/${ARCH}
-echo "no" | /usr/local/android-sdk/tools/emulator64-${EMU} -avd test -noaudio -no-window -gpu off -verbose -qemu -usbdevice tablet -vnc :0
+echo "no" | /usr/local/android-sdk/tools/android create avd -a -f -n test -t ${EMULATOR} --abi default/${ARCH}
+cp config.ini /root/.android/avd/test.avd/
+/usr/local/android-sdk/tools/android update avd -n test
+echo "no" | /usr/local/android-sdk/tools/emulator64-${EMU} -avd test -no-snapshot-load -noaudio -no-window -gpu off -verbose -qemu -usbdevice tablet -vnc :0
